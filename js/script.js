@@ -31,4 +31,36 @@ var numeroMassimo = 100;
 // poi la variabile per il numero delle bombe (es: 16)
 var numeroBombe = 16;
 
+// uan variabile per le possibilità che ha il giocatore (N.B. no accenti nei nomi delle variabili)
+var possibilita = numeroMassimo - numeroBombe;
 
+// una variabile per la lista delle Bombe (array vuoto per il la prima parte)
+var listaBombe = [];
+
+// numeri consentiti di tentativi per il giocatore
+var numeriConsentiti = [];
+
+// variabile per l'utente per ora = a 0 
+var utente = 0;
+
+// Genero le bombe ( fatti con 16 numeri casuali ma che sono Univoci però)
+// meglio usare while 
+while(listaBombe.length < numeroBombe){
+  var bomba = 34; // <-- da togliere poi il numero messo 
+
+  // decisione --> ! come === false
+  if(! listaBombe.includes(bomba)) {
+   listaBombe.push(bomba);
+  }
+}
+// per controllare
+console.table("Liste bombe ", listaBombe);
+
+
+
+/*********
+ * Funzione utility
+ */
+function nuemroRandom(max){
+  return Math.floor(Math.random() * max ) + 1;
+}
