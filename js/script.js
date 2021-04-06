@@ -26,10 +26,10 @@ Proviamo prima con pochi numeri, inserire 86 numeri ogni volta potrebbe essere u
 // 1 - creazione delle bombe   
 
 // varibile per il numero massimo (es: 100)
-var numeroMassimo = 100;
+var numeroMassimo = 10;
 
 // poi la variabile per il numero delle bombe (es: 16)
-var numeroBombe = 16;
+var numeroBombe = 2;
 
 // uan variabile per le possibilità che ha il giocatore (N.B. no accenti nei nomi delle variabili)
 var possibilita = numeroMassimo - numeroBombe;
@@ -82,32 +82,55 @@ console.table("Liste bombe ", listaBombe);   // <-- lo vede male perchè c'è pi
 // come capire se siamo sotto il numero delle possibilità? num.Consentiti.length | su cosa basiamo il far? sul numero delle possibilità
 // rapporto che diamo a questi due è? < perche devo andare fin che la lente non è uguale lui deve andare (se è = hai vinto il gioco) (includes -> per cercare al suo interno)
 
-// Le due condizione per stare nel loop di gioco 1 vito ed esco, 2 ho preso perchè ho preso una bomba
-while((numeriConsentiti.length < possibilità) && (! listaBombe.includes(utente)) ) {
-  // scelta utente di inserimento, (sovrascriviamo la varibile dell'utente)
-  utente = parseInt(prompt("Inserisci per favore un numero da 1 a " + numeroMassimo + '\nTentativi riusciti ' + numeriConsentiti.length + 'di ' + possibilità));
+// Le due condizione per stare nel loop di gioco 1 vito ed esco, 2 ho preso perchè ho preso una bomba (pos numero tot - le bombe)
 
+while((numeriConsentiti.length < possibilita) && (! listaBombe.includes(utente)) ) {
+  // scelta utente di inserimento, (sovrascriviamo la varibile dell'utente)
+  utente = parseInt(prompt("Inserisci per favore un numero da 1 a " + numeroMassimo + '\nTentativi riusciti ' + numeriConsentiti.length + 'di ' + possibilita));
+ 
+  // validazione  ( se non è un numero , se e meno di 1 , se e maggiore di 100)
+  while(isNaN(utente)|| (utente < 1) || (utente > numeroMassimo) ) {
+  
+    utente = parseInt(prompt("Valore non valido, inserisci un numero da 1 a " + numeroMassimo))
+
+  }
+  console.log(utente);
+
+  // controllo scelta
+  // numero già presente nella lista
+  // il numero è nella lista bombe
+  //(decisione)
+
+  if(listaBombe.includes(utente) ) {
+    alert("Mi dispiace hai perso hai provato con sucesso " + numeriConsentiti.length + " volte prima di trovare la bomba");
+  }
+  else if(numeriConsentiti.includes(utente)){
+    alert("Spiacente, hai già inserito questo numero, prego inseriscene un altro");
+  }
+  else if(! numeriConsentiti.includes(utente)){
+    numeriConsentiti.push(utente);
+  }
+
+  // cotrollo raggiungimento delle posibilità
+  if(numeriConsentiti.length === possibilita){
+    alert("HAI VINTO! COMPLIMENTI")
+  }
 
 }
 
+/***************************************
+ * END DIPLAY
+ * 
+ * ************************************ */
 
-
-
-
-
-
-
-
-
-
-
-
-
+console.log("--> GIOCO FINITO <--");
+console.log("La lista dei numeri validi inseriti ", numeriConsentiti);
+console.log("I tentativi riusciti ", numeriConsentiti.length);
 
 
 /****************************************************************
  * Funzione utility
  ****************************************************************/
-function nuemroRandom(max){
+function numeroRandom(max){
   return Math.floor(Math.random() * max ) + 1;
 }
